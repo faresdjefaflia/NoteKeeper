@@ -1,152 +1,267 @@
-### **اسم المشروع**: **NoteKeeper**  
-**الوصف المختصر**: تطبيق ويب لإدارة الملاحظات يتيح للمستخدمين تسجيل الدخول، إضافة وتعديل وحذف ملاحظاتهم مع حماية الوصول باستخدام **JWT** والتحقق من صحة البيانات باستخدام **Joi**.
+### Project Name: **NoteKeeper**
+
+**Brief Description**:  
+A web application for managing notes, allowing users to add, edit, and delete their notes with secure access using JWT and data validation via Joi. Built with Express.js as the server and MariaDB as the database.
 
 ---
 
-### **التقنيات المستخدمة**:
-#### 1. **Frontend**:
-- **Nuxt.js**: إطار عمل لبناء التطبيقات المتقدمة باستخدام Vue.js.
-- **Tailwind CSS**: إطار عمل لتصميم الواجهات بسهولة مع تصميم مرن.
-  
-#### 2. **Backend**:
-- **Express.js**: خادم تطبيقات ويب.
-- **MariaDB**: قاعدة بيانات لتخزين بيانات المستخدمين والملاحظات.
-- **JWT**: للتحقق من هوية المستخدم وحماية الوصول.
-- **bcrypt**: لتشفير كلمات المرور.
-- **Joi**: للتحقق من صحة البيانات المدخلة من المستخدم.
-  
-#### 3. **أدوات أخرى**:
-- **Postman**: لاختبار الـ APIs.
-- **Git**: لإدارة الكود والمشاركة.
+### **Technologies Used**  
+
+#### **Frontend**:  
+1. **Nuxt.js**: Framework for building advanced Vue.js applications.  
+2. **Tailwind CSS**: Framework for flexible and easy-to-design user interfaces.
+
+#### **Backend**:  
+1. **Express.js**: Web application framework.  
+2. **MariaDB**: Database for storing user and note data.  
+3. **JWT**: For user authentication and secure access.  
+4. **bcrypt**: For password encryption.  
+5. **Joi**: For validating user input.
+
+#### **Other Tools**:  
+1. **Postman**: API testing.  
+2. **Git**: Code management and collaboration.
 
 ---
 
-### **المكونات الرئيسية**:
-#### 1. **نظام تسجيل الدخول والتسجيل**:
-   - **تسجيل مستخدم جديد**.
-   - **تسجيل الدخول** باستخدام البريد الإلكتروني وكلمة المرور.
-   - استخدام **JWT** لإنشاء توكن للتحقق من الهوية.
-  
-#### 2. **إدارة الملاحظات**:
-   - **إضافة ملاحظة جديدة**.
-   - **عرض الملاحظات الخاصة بالمستخدم**.
-   - **تعديل الملاحظات**.
-   - **حذف الملاحظات**.
-  
-#### 3. **حماية الوصول**:
-   - استخدام **JWT** في كل الطلبات المحمية.
-  
-#### 4. **التحقق من البيانات**:
-   - استخدام **Joi** للتحقق من صحة البيانات المدخلة (مثل البريد الإلكتروني وكلمة المرور والمحتوى).
+### **Main Features**
+
+1. **Authentication System**:
+   - New user registration.  
+   - Login with email and password.  
+   - JWT tokens for identity verification.  
+
+2. **Note Management**:
+   - Add new notes.  
+   - View user-specific notes.  
+   - Edit notes.  
+   - Delete notes.  
+
+3. **Access Control**:
+   - Use JWT for all protected endpoints.
+
+4. **Data Validation**:
+   - Validate inputs (email, password, content) using Joi.
 
 ---
 
-### **مخطط المشروع**:
+### **Project Schema**  
 
-#### **1. قاعدة البيانات**:
-   - **users**:
-     - `id` (INT, PRIMARY KEY)
-     - `email` (VARCHAR, UNIQUE)
-     - `password` (VARCHAR)
-     - `created_at` (TIMESTAMP)
+#### **Database Structure**:  
+
+1. **Users Table**:  
+   - `id` (INT, PRIMARY KEY)  
+   - `email` (VARCHAR, UNIQUE)  
+   - `password` (VARCHAR)  
+   - `created_at` (TIMESTAMP)  
+
+2. **Notes Table**:  
+   - `id` (INT, PRIMARY KEY)  
+   - `user_id` (INT, FOREIGN KEY -> users.id)  
+   - `note_content` (TEXT)  
+   - `created_at` (TIMESTAMP)  
+   - `updated_at` (TIMESTAMP)  
+
+---
+
+### **Detailed Steps (Backend)**  
+
+#### **1. User Registration**:  
+**Endpoint**: `POST /register`  
+- **Input**:  
+  - `email`  
+  - `password`  
+- **Process**:  
+  - Validate input using Joi.  
+  - Encrypt password with bcrypt.  
+  - Add user to the database.  
+- **Output**: Success or failure message.  
+
+#### **2. User Login**:  
+**Endpoint**: `POST /login`  
+- **Input**:  
+  - `email`  
+  - `password`  
+- **Process**:  
+  - Validate input using Joi.  
+  - Verify password.  
+  - Generate a JWT token.  
+- **Output**: JWT token.  
+
+#### **3. Note Management**:  
+
+- **Add Note**:  
+  **Endpoint**: `POST /notes`  
+  - **Input**: `note_content`  
+  - **Process**:  
+    - Validate content using Joi.  
+    - Associate note with `user_id` from JWT.  
+  - **Output**: Saved note.  
+
+- **Get Notes**:  
+  **Endpoint**: `GET /notes`  
+  - **Input**: None.  
+  - **Process**: Verify JWT.  
+  - **Output**: User’s notes.  
+
+- **Update Note**:  
+  **Endpoint**: `PUT /notes/:id`  
+  - **Input**: `note_content`  
+  - **Process**:  
+    - Verify JWT.  
+    - Update note.  
+  - **Output**: Updated note.  
+
+- **Delete Note**:  
+  **Endpoint**: `DELETE /notes/:id`  
+  - **Input**: None.  
+  - **Process**: Verify JWT.  
+  - **Output**: Success or failure message.  
+
+---
+
+### **Security Features**  
+- Use JWT in all protected routes via middleware.  
+
+---
+
+### **Data Validation Rules**  
+- Validate emails.  
+- Ensure passwords include uppercase, lowercase, and numbers.  
+- Ensure notes are not empty.  
+
+---
+
+### **API Endpoints Overview**
+
+| **Method** | **Endpoint**    | **Input**               | **Output**            |
+|------------|-----------------|-------------------------|-----------------------|
+| POST       | `/register`     | `email`, `password`     | Success/Failure       |
+| POST       | `/login`        | `email`, `password`     | JWT Token             |
+| POST       | `/notes`        | `note_content`          | New Note              |
+| GET        | `/notes`        | None                    | List of Notes         |
+| PUT        | `/notes/:id`    | `note_content`          | Updated Note          |
+| DELETE     | `/notes/:id`    | None                    | Success/Failure       |
+
+---
+
+### API Pages and Details Table with URLs  
+
+| **Page Name**        | **Description**                                  | **Endpoint (API)**       | **Inputs**                             | **Outputs**                                  | **URL**                   | **Notes**                                |
+|----------------------|--------------------------------------------------|--------------------------|----------------------------------------|---------------------------------------------|---------------------------|------------------------------------------|
+| Registration Page     | Register a new user                             | `POST /register`         | `email`, `password`                   | Success or failure message                  | `/register`               | Validates data with Joi, encrypts the password using bcrypt. |
+| Login Page            | User login                                      | `POST /login`            | `email`, `password`                   | JWT Token                                   | `/login`                  | Validates credentials, returns a JWT token. |
+| Add Note Page         | Add a new note                                  | `POST /notes`            | `note_content`                        | New note data                               | `/notes`                  | Validates note content with Joi and links it to the user_id from the token. |
+| View Notes Page       | Display all user notes                          | `GET /notes`             | None                                   | List of user-specific notes                 | `/notes`                  | JWT token validation required before fetching data. |
+| Edit Note Page        | Edit a specific note's content                  | `PUT /notes/:id`         | `note_content`                        | Updated note data                           | `/notes/:id`              | Validates the token and updates the note. |
+| Delete Note Page      | Delete a specific note                          | `DELETE /notes/:id`      | None                                   | Success or failure message                  | `/notes/:id`              | The note must be linked to the user_id from the token. |
+
+
+### Professional Technical Task Sequence for Project Development  
+
+#### **Phase 1: Setup the Foundation**  
+1. **Setup Backend Environment:**  
+   - Install Express.js and required packages (e.g., bcrypt, JWT, Joi).  
+   - **/ تثبيت Express.js والحزم المطلوبة (مثل bcrypt، JWT، Joi).**  
+   - Setup MariaDB and establish a connection with the server.  
+   - **/ إعداد MariaDB وإنشاء اتصال مع الخادم.**  
+
+2. **Setup Frontend Environment:**  
+   - Create a Nuxt.js project.  
+   - **/ إنشاء مشروع Nuxt.js.**  
+   - Install and configure Tailwind CSS.  
+   - **/ تثبيت Tailwind CSS وضبط إعداداته.**  
+
+---
+
+#### **Phase 2: Backend Development**  
+1. **Database Schema Creation:**  
+   - Create the `users` table.  
+   - **/ إنشاء جدول المستخدمين (`users`).**  
+   - Create the `notes` table.  
+   - **/ إنشاء جدول الملاحظات (`notes`).**  
+
+2. **Develop Core Endpoints:**  
+   - **`POST /register`:** User registration with password hashing and Joi validation.  
+   - **/ إنشاء Endpoint لتسجيل المستخدم مع تشفير كلمة المرور والتحقق باستخدام Joi.**  
+   - **`POST /login`:** User login with data validation and JWT generation.  
+   - **/ إنشاء Endpoint لتسجيل الدخول مع التحقق من البيانات وتوليد JWT.**  
+
+3. **Implement JWT Protection:**  
+   - Develop Middleware to validate JWT tokens for protected routes.  
+   - **/ إعداد Middleware للتحقق من صحة التوكن JWT لحماية المسارات.**  
+
+4. **Develop Note Management Endpoints:**  
+   - **`POST /notes`:** Add a new note.  
+   - **/ إنشاء Endpoint لإضافة ملاحظة جديدة.**  
+   - **`GET /notes`:** Retrieve user-specific notes.  
+   - **/ إنشاء Endpoint لعرض الملاحظات الخاصة بالمستخدم.**  
+   - **`PUT /notes/:id`:** Update a note by its ID.  
+   - **/ إنشاء Endpoint لتعديل ملاحظة باستخدام معرفها.**  
+   - **`DELETE /notes/:id`:** Delete a note by its ID.  
+   - **/ إنشاء Endpoint لحذف ملاحظة باستخدام معرفها.**  
+
+5. **Test APIs with Postman:**  
+   - Verify all endpoints individually for proper functionality.  
+   - **/ اختبار جميع Endpoints باستخدام Postman للتحقق من وظائفها.**  
+
+---
+
+#### **Phase 3: Frontend Development**  
+1. **Design Core Pages:**  
+   - Login and registration pages with input forms.  
+   - **/ تصميم صفحات تسجيل الدخول والتسجيل مع النماذج.**  
+   - Notes listing page with a simple layout.  
+   - **/ تصميم صفحة لعرض الملاحظات بتنسيق بسيط.**  
+   - Add and edit note forms.  
+   - **/ تصميم نماذج لإضافة وتعديل الملاحظات.**  
+
+2. **Setup Axios for API Integration:**  
+   - Implement login, registration, and note management requests.  
+   - **/ تنفيذ طلبات تسجيل الدخول والتسجيل وإدارة الملاحظات باستخدام Axios.**  
+   - Store JWT in `LocalStorage` for authorization and session persistence.  
+   - **/ تخزين JWT محليًا لاستخدامه في التفويض والحفاظ على الجلسة.**  
+
+3. **Add Page Protection:**  
+   - Use Middleware to restrict access to pages based on JWT validity.  
+   - **/ إضافة Middleware لتقييد الوصول إلى الصفحات بناءً على صلاحية JWT.**  
+
+---
+
+#### **Phase 4: System Integration**  
+1. **Connect Frontend with Backend:**  
+   - Link login and registration forms to their respective API endpoints.  
+   - **/ ربط نماذج تسجيل الدخول والتسجيل مع Endpoints الخاصة بها.**  
+   - Integrate notes management pages with APIs for adding, viewing, editing, and deleting notes.  
+   - **/ دمج صفحات إدارة الملاحظات مع APIs لإضافة وعرض وتعديل وحذف الملاحظات.**  
+
+2. **Handle Errors Gracefully:**  
+   - Display error messages from the backend on the frontend.  
+   - **/ عرض رسائل الخطأ القادمة من الخادم في الواجهة.**  
+   - Implement automatic logout upon JWT expiration.  
+   - **/ تنفيذ تسجيل خروج تلقائي عند انتهاء صلاحية JWT.**  
+
+---
+
+#### **Phase 5: Project Enhancement**  
+1. **Add Advanced Features:**  
+   - Implement search or categorization for notes.  
+   - **/ تنفيذ ميزة البحث أو تصنيف الملاحظات.**  
+   - Enhance the UI design with Tailwind CSS.  
+   - **/ تحسين تصميم الواجهة باستخدام Tailwind CSS.**  
+
+2. **Comprehensive Testing:**  
+   - Perform end-to-end testing of frontend and backend integration.  
+   - **/ إجراء اختبارات شاملة لتكامل الواجهة الأمامية مع الخلفية.**  
+   - Verify performance and resolve any remaining issues.  
+   - **/ التحقق من الأداء وإصلاح المشكلات المتبقية.**  
+
+3. **Final Deployment:**  
+   - Ensure readiness for production and deploy the application.  
+   - **/ التأكد من الجاهزية للنشر وإطلاق التطبيق.**
   
-   - **notes**:
-     - `id` (INT, PRIMARY KEY)
-     - `user_id` (INT, FOREIGN KEY -> users.id)
-     - `note_content` (TEXT)
-     - `created_at` (TIMESTAMP)
-     - `updated_at` (TIMESTAMP)
-
-#### **2. الخطوات التفصيلية (Backend)**:
-
-##### 2.1 **تسجيل مستخدم جديد**:
-- **POST /register**:
-  - المدخلات: `email`, `password`.
-  - التحقق من صحة البيانات باستخدام **Joi**.
-  - تشفير كلمة المرور باستخدام **bcrypt**.
-  - إضافة المستخدم إلى قاعدة البيانات.
-  - المخرجات: رسالة نجاح أو فشل.
-
-##### 2.2 **تسجيل الدخول**:
-- **POST /login**:
-  - المدخلات: `email`, `password`.
-  - التحقق من صحة البيانات باستخدام **Joi**.
-  - التحقق من صحة كلمة المرور.
-  - توليد توكن **JWT**.
-  - المخرجات: توكن JWT.
-
-##### 2.3 **إدارة الملاحظات**:
-- **POST /notes**:
-  - المدخلات: `note_content` (محتوى الملاحظة).
-  - التحقق من صحة البيانات باستخدام **Joi**.
-  - ربط الملاحظة بـ `user_id` من التوكن.
-  - المخرجات: ملاحظة جديدة محفوظة.
-
-- **GET /notes**:
-  - المدخلات: لا شيء.
-  - التحقق من صلاحية التوكن.
-  - المخرجات: جميع الملاحظات الخاصة بالمستخدم.
-
-- **PUT /notes/:id**:
-  - المدخلات: `note_content` (المحتوى المعدل).
-  - التحقق من صلاحية التوكن.
-  - المخرجات: ملاحظة محدثة.
-
-- **DELETE /notes/:id**:
-  - المدخلات: لا شيء.
-  - التحقق من صلاحية التوكن.
-  - المخرجات: رسالة نجاح أو فشل.
-
-#### **3. حماية الوصول باستخدام JWT**:
-- التحقق من التوكن في كل نقطة نهاية محمية باستخدام ميدلوير.
-
-#### **4. التحقق من البيانات باستخدام Joi**:
-- التحقق من صحة **البريد الإلكتروني**.
-- التحقق من صحة **كلمة المرور** (بأنها تحتوي على حروف كبيرة وصغيرة وأرقام).
-- التحقق من **محتوى الملاحظات** (بأن يكون النص غير فارغ).
-
----
-
-### **المخطط البياني (API Endpoints)**:
-
-1. **POST /register**:
-   - المدخلات:
-     - `email`: البريد الإلكتروني للمستخدم.
-     - `password`: كلمة المرور.
-   - المخرجات: رسالة نجاح أو فشل.
-
-2. **POST /login**:
-   - المدخلات:
-     - `email`: البريد الإلكتروني.
-     - `password`: كلمة المرور.
-   - المخرجات: توكن JWT.
-
-3. **POST /notes**:
-   - المدخلات:
-     - `note_content`: محتوى الملاحظة.
-   - المخرجات: ملاحظة جديدة محفوظة.
-
-4. **GET /notes**:
-   - المدخلات: لا شيء.
-   - المخرجات: قائمة الملاحظات الخاصة بالمستخدم.
-
-5. **PUT /notes/:id**:
-   - المدخلات:
-     - `note_content`: المحتوى المعدل.
-   - المخرجات: ملاحظة محدثة.
-
-6. **DELETE /notes/:id**:
-   - المدخلات: لا شيء.
-   - المخرجات: رسالة نجاح أو فشل.
-
----
-
-### **الخطوات المستقبلية**:
-- إضافة إمكانية **البحث أو الفلاتر** على الملاحظات.
-- إضافة **تصنيف للملاحظات** (مثل: المهم، الشخصي).
-- تطوير **واجهة المستخدم باستخدام Nuxt.js و Tailwind CSS** لتوفير تجربة مستخدم أفضل.
-
----
-
-**ملخص**:
-المشروع يركز على **إدارة الملاحظات** مع التحقق من هوية المستخدمين باستخدام **JWT**، بالإضافة إلى حماية البيانات عبر التحقق باستخدام **Joi**. هذا يتيح لك تعلم كيفية بناء تطبيق شامل يشمل الـ Frontend و Backend مع قاعدة بيانات قوية وتحقق من البيانات.
+     
+### **Future Steps**  
+1. Add search and filter options for notes.  
+2. Implement note categorization (e.g., important, personal).  
+3. Enhance user interface using Nuxt.js and Tailwind CSS for a better experience.
