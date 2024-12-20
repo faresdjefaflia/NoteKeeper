@@ -161,106 +161,76 @@ A web application for managing notes, allowing users to add, edit, and delete th
 
 #### **Phase 1: Setup the Foundation**  
 1. **Setup Backend Environment:**  
-   - Install Express.js and required packages (e.g., bcrypt, JWT, Joi).  
-   - **/ تثبيت Express.js والحزم المطلوبة (مثل bcrypt، JWT، Joi).**  
-   - Setup MariaDB and establish a connection with the server.  
-   - **/ إعداد MariaDB وإنشاء اتصال مع الخادم.**  
+   - Install Express.js and required packages (e.g., bcrypt, JWT, Joi). / تثبيت Express.js والحزم المطلوبة (مثل bcrypt، JWT، Joi).  
+   - Setup MariaDB and establish a connection with the server. / إعداد MariaDB وإنشاء اتصال مع الخادم.  
 
 2. **Setup Frontend Environment:**  
-   - Create a Nuxt.js project.  
-   - **/ إنشاء مشروع Nuxt.js.**  
-   - Install and configure Tailwind CSS.  
-   - **/ تثبيت Tailwind CSS وضبط إعداداته.**  
+   - Create a Nuxt.js project. / إنشاء مشروع Nuxt.js.  
+   - Install and configure Tailwind CSS. / تثبيت Tailwind CSS وضبط إعداداته.  
 
 ---
 
 #### **Phase 2: Backend Development**  
 1. **Database Schema Creation:**  
-   - Create the `users` table.  
-   - **/ إنشاء جدول المستخدمين (`users`).**  
-   - Create the `notes` table.  
-   - **/ إنشاء جدول الملاحظات (`notes`).**  
+   - Create the `users` table. / إنشاء جدول المستخدمين (`users`).  
+   - Create the `notes` table. / إنشاء جدول الملاحظات (`notes`).  
 
 2. **Develop Core Endpoints:**  
-   - **`POST /register`:** User registration with password hashing and Joi validation.  
-   - **/ إنشاء Endpoint لتسجيل المستخدم مع تشفير كلمة المرور والتحقق باستخدام Joi.**  
-   - **`POST /login`:** User login with data validation and JWT generation.  
-   - **/ إنشاء Endpoint لتسجيل الدخول مع التحقق من البيانات وتوليد JWT.**  
+   - **`POST /register`:** User registration with password hashing and Joi validation. / إنشاء Endpoint لتسجيل المستخدم مع تشفير كلمة المرور والتحقق باستخدام Joi.  
+   - **`POST /login`:** User login with data validation and JWT generation. / إنشاء Endpoint لتسجيل الدخول مع التحقق من البيانات وتوليد JWT.  
 
 3. **Implement JWT Protection:**  
-   - Develop Middleware to validate JWT tokens for protected routes.  
-   - **/ إعداد Middleware للتحقق من صحة التوكن JWT لحماية المسارات.**  
+   - Develop Middleware to validate JWT tokens for protected routes. / إعداد Middleware للتحقق من صحة التوكن JWT لحماية المسارات.  
 
 4. **Develop Note Management Endpoints:**  
-   - **`POST /notes`:** Add a new note.  
-   - **/ إنشاء Endpoint لإضافة ملاحظة جديدة.**  
-   - **`GET /notes`:** Retrieve user-specific notes.  
-   - **/ إنشاء Endpoint لعرض الملاحظات الخاصة بالمستخدم.**  
-   - **`PUT /notes/:id`:** Update a note by its ID.  
-   - **/ إنشاء Endpoint لتعديل ملاحظة باستخدام معرفها.**  
-   - **`DELETE /notes/:id`:** Delete a note by its ID.  
-   - **/ إنشاء Endpoint لحذف ملاحظة باستخدام معرفها.**  
+   - **`POST /notes`:** Add a new note. / إنشاء Endpoint لإضافة ملاحظة جديدة.  
+   - **`GET /notes`:** Retrieve user-specific notes. / إنشاء Endpoint لعرض الملاحظات الخاصة بالمستخدم.  
+   - **`PUT /notes/:id`:** Update a note by its ID. / إنشاء Endpoint لتعديل ملاحظة باستخدام معرفها.  
+   - **`DELETE /notes/:id`:** Delete a note by its ID. / إنشاء Endpoint لحذف ملاحظة باستخدام معرفها.  
 
 5. **Test APIs with Postman:**  
-   - Verify all endpoints individually for proper functionality.  
-   - **/ اختبار جميع Endpoints باستخدام Postman للتحقق من وظائفها.**  
+   - Verify all endpoints individually for proper functionality. / اختبار جميع Endpoints باستخدام Postman للتحقق من وظائفها.  
 
 ---
 
 #### **Phase 3: Frontend Development**  
 1. **Design Core Pages:**  
-   - Login and registration pages with input forms.  
-   - **/ تصميم صفحات تسجيل الدخول والتسجيل مع النماذج.**  
-   - Notes listing page with a simple layout.  
-   - **/ تصميم صفحة لعرض الملاحظات بتنسيق بسيط.**  
-   - Add and edit note forms.  
-   - **/ تصميم نماذج لإضافة وتعديل الملاحظات.**  
+   - Login and registration pages with input forms. / تصميم صفحات تسجيل الدخول والتسجيل مع النماذج.  
+   - Notes listing page with a simple layout. / تصميم صفحة لعرض الملاحظات بتنسيق بسيط.  
+   - Add and edit note forms. / تصميم نماذج لإضافة وتعديل الملاحظات.  
 
 2. **Setup Axios for API Integration:**  
-   - Implement login, registration, and note management requests.  
-   - **/ تنفيذ طلبات تسجيل الدخول والتسجيل وإدارة الملاحظات باستخدام Axios.**  
-   - Store JWT in `LocalStorage` for authorization and session persistence.  
-   - **/ تخزين JWT محليًا لاستخدامه في التفويض والحفاظ على الجلسة.**  
+   - Implement login, registration, and note management requests. / تنفيذ طلبات تسجيل الدخول والتسجيل وإدارة الملاحظات باستخدام Axios.  
+   - Store JWT in `LocalStorage` for authorization and session persistence. / تخزين JWT محليًا لاستخدامه في التفويض والحفاظ على الجلسة.  
 
 3. **Add Page Protection:**  
-   - Use Middleware to restrict access to pages based on JWT validity.  
-   - **/ إضافة Middleware لتقييد الوصول إلى الصفحات بناءً على صلاحية JWT.**  
+   - Use Middleware to restrict access to pages based on JWT validity. / إضافة Middleware لتقييد الوصول إلى الصفحات بناءً على صلاحية JWT.  
 
 ---
 
 #### **Phase 4: System Integration**  
 1. **Connect Frontend with Backend:**  
-   - Link login and registration forms to their respective API endpoints.  
-   - **/ ربط نماذج تسجيل الدخول والتسجيل مع Endpoints الخاصة بها.**  
-   - Integrate notes management pages with APIs for adding, viewing, editing, and deleting notes.  
-   - **/ دمج صفحات إدارة الملاحظات مع APIs لإضافة وعرض وتعديل وحذف الملاحظات.**  
+   - Link login and registration forms to their respective API endpoints. / ربط نماذج تسجيل الدخول والتسجيل مع Endpoints الخاصة بها.  
+   - Integrate notes management pages with APIs for adding, viewing, editing, and deleting notes. / دمج صفحات إدارة الملاحظات مع APIs لإضافة وعرض وتعديل وحذف الملاحظات.  
 
 2. **Handle Errors Gracefully:**  
-   - Display error messages from the backend on the frontend.  
-   - **/ عرض رسائل الخطأ القادمة من الخادم في الواجهة.**  
-   - Implement automatic logout upon JWT expiration.  
-   - **/ تنفيذ تسجيل خروج تلقائي عند انتهاء صلاحية JWT.**  
+   - Display error messages from the backend on the frontend. / عرض رسائل الخطأ القادمة من الخادم في الواجهة.  
+   - Implement automatic logout upon JWT expiration. / تنفيذ تسجيل خروج تلقائي عند انتهاء صلاحية JWT.  
 
 ---
 
 #### **Phase 5: Project Enhancement**  
 1. **Add Advanced Features:**  
-   - Implement search or categorization for notes.  
-   - **/ تنفيذ ميزة البحث أو تصنيف الملاحظات.**  
-   - Enhance the UI design with Tailwind CSS.  
-   - **/ تحسين تصميم الواجهة باستخدام Tailwind CSS.**  
+   - Implement search or categorization for notes. / تنفيذ ميزة البحث أو تصنيف الملاحظات.  
+   - Enhance the UI design with Tailwind CSS. / تحسين تصميم الواجهة باستخدام Tailwind CSS.  
 
 2. **Comprehensive Testing:**  
-   - Perform end-to-end testing of frontend and backend integration.  
-   - **/ إجراء اختبارات شاملة لتكامل الواجهة الأمامية مع الخلفية.**  
-   - Verify performance and resolve any remaining issues.  
-   - **/ التحقق من الأداء وإصلاح المشكلات المتبقية.**  
+   - Perform end-to-end testing of frontend and backend integration. / إجراء اختبارات شاملة لتكامل الواجهة الأمامية مع الخلفية.  
+   - Verify performance and resolve any remaining issues. / التحقق من الأداء وإصلاح المشكلات المتبقية.  
 
 3. **Final Deployment:**  
-   - Ensure readiness for production and deploy the application.  
-   - **/ التأكد من الجاهزية للنشر وإطلاق التطبيق.**
-  
-     
+   - Ensure readiness for production and deploy the application. / التأكد من الجاهزية للنشر وإطلاق التطبيق.
+   - 
 ### **Future Steps**  
 1. Add search and filter options for notes.  
 2. Implement note categorization (e.g., important, personal).  
