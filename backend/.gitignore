@@ -1,0 +1,25 @@
+# Node.js modules
+node_modules/
+
+# ملفات البيئة
+.env
+
+# الملفات الخاصة بالأنظمة
+.DS_Store
+Thumbs.db
+
+# سجلات التطبيق
+*.log
+
+# مجلدات الـ build أو الـ dist إذا كانت موجودة
+build/
+dist/
+
+# مجلدات مؤقتة من الـ npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ملفات الـ IDE أو المحررات
+.vscode/
+.idea/
