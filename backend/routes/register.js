@@ -7,11 +7,6 @@ const insertUser = require('../middlewares/register/insertUserMiddleware');
 
 
 
-router.post('/', 
-  validateUser, 
-  checkUserExists, 
-  hashPassword, 
-  insertUser
-);
+router.post('/', validateUser, checkUserExists, hashPassword, insertUser);
 
 module.exports = router;

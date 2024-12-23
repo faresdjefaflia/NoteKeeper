@@ -3,15 +3,9 @@ const router = express.Router();
 
 const validateReq = require('../middlewares/login/validateUserMiddleware');
 const checkUserInData = require('../middlewares/login/checkUserInData');
-const checkPasswordInData = require('../middlewares/login/checkPassword');
+const checkPassword = require('../middlewares/login/checkPassword');
 const createSession = require('../middlewares/login/createSession');
 
-
-// const joi = require('joi');
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
-// const pool = require('../db');
-// const JWT_SECRET = 'your-secret-key';
 
 /**
  * User Login Endpoint
@@ -26,7 +20,7 @@ const createSession = require('../middlewares/login/createSession');
  * 6. Returns appropriate responses for success or errors.
  */
 
-router.post('/',validateReq, checkUserInData, checkPasswordInData, createSession, (req, res) => {
+router.post('/',validateReq, checkUserInData, checkPassword, createSession, (req, res) => {
   res.json({
     dataUser: req.poolUser,
     token: req.token
