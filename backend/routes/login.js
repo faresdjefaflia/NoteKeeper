@@ -1,12 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const joi = require('joi');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const pool = require('../db');
-const rateLimit = require('express-rate-limit');
 
-const JWT_SECRET = 'your-secret-key';
+const validateReq = require('../middlewares/login/validateUserMiddleware');
+const checkUserInData = require('../middlewares/login/checkUserInData');
+const checkPasswordInData = require('../middlewares/login/checkPassword');
+const createSession = require('../middlewares/login/createSession');
+
+
+// const joi = require('joi');
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+// const pool = require('../db');
+// const JWT_SECRET = 'your-secret-key';
+
 /**
  * User Login Endpoint
  * 
@@ -20,44 +26,11 @@ const JWT_SECRET = 'your-secret-key';
  * 6. Returns appropriate responses for success or errors.
  */
 
-router.post('/', async (req, res) => {
-  // check data from front end
-  const schema = joi.object({
-    email: joi.string().email().required(),
-    password: joi.string().min(3).max(30).required(),
+router.post('/',validateReq, checkUserInData, checkPasswordInData, createSession, (req, res) => {
+  res.json({
+    dataUser: req.poolUser,
+    token: req.token
   });
-  const { error } = schema.validate(req.body);
-
-  if (error) {
-    res.status(400).send(error.details[0].message);
-  } else {
-    // add new name for data from frontend
-    const { email: emailInput, password: passwordInput } = req.body;
-
-    try {
-      // pool data from database
-      const checkUser = await pool.query('SELECT * FROM users WHERE email = ?', [emailInput]);
-      // check if data exist
-      if (checkUser.length === 0) {
-        res.status(404).json('user not fond');
-      } else {
-        // add new name for data from database
-        const { email: emailData, password: passwordData, name: nameData } = checkUser[0];
-        // compare password with database
-        const checkPaswoord = await bcrypt.compareSync(passwordInput, passwordData);
-
-        if (checkPaswoord) {
-          const token = jwt.sign({ userId: checkUser[0].id, email: emailData }, JWT_SECRET, { expiresIn: '1h' });
-          res.status(200).json({ message: `welcome back ${nameData}`, token: token });
-        } else {
-          res.status(401).send('invalid credentials');
-        }
-      }
-    }
-    catch {
-      res.status(500).send('error server');
-    }
-  };
 });
 
 module.exports = router;
