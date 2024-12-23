@@ -1,6 +1,17 @@
 // checkUserExistsMiddleware.js
 const pool = require('../../db');
 
+/**
+  @desc Check if the user already exists in the database
+  @route /checkUserExists
+  @method Middleware
+  @access private
+  @etape01 Extracts the email from the request body. 
+  @etape02 Queries the database to check if the email is already registered.
+  @etape03 If the email exists, returns an error response.
+  @etape04 If the email doesn't exist, proceeds to the next middleware.
+ */
+
 const checkUserExists = async (req, res, next) => {
   const { email } = req.body;
   try {
@@ -8,7 +19,7 @@ const checkUserExists = async (req, res, next) => {
     if (verifUser.length > 0) {
       return res.status(400).send('User already exists');
     }
-    next(); // إذا لم يكن المستخدم موجودًا، يتم الانتقال إلى الميدلوير التالي
+    next(); 
   } catch (err) {
     res.status(500).send('Error checking user existence');
   }

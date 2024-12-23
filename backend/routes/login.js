@@ -8,17 +8,20 @@ const createSession = require('../middlewares/login/createSession');
 
 
 /**
- * User Login Endpoint
- * 
- * 1. Applies rate limiting (max 5 attempts in 15 minutes) to prevent brute-force attacks.
- * 2. Validates user input using Joi for:
+  @desc User Login Endpoint
+  @route /login
+  @method POST
+  @access public
+  @etape01 Applies rate limiting (max 5 attempts in 15 minutes) to prevent brute-force attacks.
+  @etape02Validates user input using Joi for: @validateReq
  *    - Email: Valid email format, required.
  *    - Password: Min 3, Max 30 characters, required.
- * 3. Checks if the email exists in the database.
- * 4. Compares the entered password with the stored hashed password using bcrypt.
- * 5. If valid, generates a JWT token for user authentication.
- * 6. Returns appropriate responses for success or errors.
+  @etape03 Checks if the email exists in the database. @checkUserInData
+  @etape04 Compares the entered password with the stored hashed password using bcrypt. @checkPassword
+  @etape05 If valid, generates a JWT token for user authentication. @createSession
+  @etape06 Returns data
  */
+
 
 router.post('/',validateReq, checkUserInData, checkPassword, createSession, (req, res) => {
   res.json({
