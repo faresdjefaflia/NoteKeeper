@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const validateJWT = require('../middlewares/home/validateJWT');
-const poolData = require('../middlewares/home/poolData');
-
 /**
   @desc Home Page Endpoint
   @route /home
@@ -14,8 +11,8 @@ const poolData = require('../middlewares/home/poolData');
   @etape03 Returns the processed data in the response. @returnData
  */
 
-router.get('/', validateJWT, poolData, (req, res) => {
-  res.send(req.data);
+router.post('/', (req, res) => {
+  res.json(req.body);
 });
 
 module.exports = router;
