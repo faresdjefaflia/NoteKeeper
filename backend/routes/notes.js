@@ -1,14 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
+//show all notes
+const validateJoiForUpdate = require('../middlewares/notes/get/validateJoiForUpdate');
+const poolNotesFromData = require('../middlewares/notes/get/poolNotesFromData');
+
+//add notes
 const validateJWT = require('../middlewares/validateJWT');
-const validateJOI = require('../middlewares/notes/validateJOI');
+const validateJoiForAdd = require('../middlewares/notes/add/validateJoiForAdd');
 const checkUserInData = require('../middlewares/notes/checkUserInData');
-const addNoteToData = require('../middlewares/notes/addNoteToData')
-/* GET home page. */
-// router.get('/', validateJWT, (req, res) => {
-//   res.send(req.data);
-// });
+const addNoteToData = require('../middlewares/notes/add/addNoteToData')
+/*********/
+
+/* GET all notes. */
+router.get('/', validateJWT, validateJoiForUpdate, checkUserInData, poolNotesFromData, (req, res) => {
+  res.status(200).json(req.notes)
+});
+
+
 
 /**
   @desc Handle note creation process
@@ -23,8 +32,12 @@ const addNoteToData = require('../middlewares/notes/addNoteToData')
   @etape06 If any step fails, appropriate error handling will occur in the middleware.
  */
 
-router.post('/', validateJWT, checkUserInData, validateJOI, addNoteToData, (req, res) => {
+router.post('/', validateJWT, validateJoiForAdd, checkUserInData, addNoteToData, (req, res) => {
   res.status(200).send('thanks, the note is save');
 });
+
+router.put('/', (req, res) => {
+  res.status(200).send('the note is update')
+})
 
 module.exports = router;

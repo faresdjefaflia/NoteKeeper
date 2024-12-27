@@ -1,4 +1,4 @@
-const pool = require('../../db');
+const pool = require('../../../db');
 
 /**
   @desc Insert a new note into the database
