@@ -12,7 +12,8 @@ const pool = require('../../../db');
  */
 
 module.exports = async (req, res, next) => {
-  const { user_id, content } = req.body;
+  const { content } = req.body;
+  const user_id = req.user.user;
   try {
     const addNoteToData = await pool.query('INSERT INTO notes (user_id, content) VALUES (?, ?)', [user_id, content]);
     next();

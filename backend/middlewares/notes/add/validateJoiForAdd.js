@@ -13,7 +13,6 @@ const Joi = require("joi");
 
 module.exports = (req, res, next) => {
   const schema = Joi.object({
-    user_id: Joi.number().required(),
     content: Joi.string().min(3).required()
   });
 

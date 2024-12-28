@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const jwt = require('../middlewares/validateJWT');
 /**
   @desc Home Page Endpoint
   @route /home
@@ -11,8 +11,9 @@ var router = express.Router();
   @etape03 Returns the processed data in the response. @returnData
  */
 
-router.post('/', (req, res) => {
-  res.json(req.body);
+router.get('/', jwt, (req, res) => {
+  const userId = req.user.user;
+  res.json(userId);
 });
 
 module.exports = router;

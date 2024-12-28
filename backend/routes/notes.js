@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //show all notes
-const validateJoiForUpdate = require('../middlewares/notes/get/validateJoiForUpdate');
+// const validateJoiForUpdate = require('../middlewares/notes/get/validateJoiForUpdate');
 const poolNotesFromData = require('../middlewares/notes/get/poolNotesFromData');
 
 //add notes
@@ -13,7 +13,7 @@ const addNoteToData = require('../middlewares/notes/add/addNoteToData')
 /*********/
 
 /* GET all notes. */
-router.get('/', validateJWT, validateJoiForUpdate, checkUserInData, poolNotesFromData, (req, res) => {
+router.get('/', validateJWT, checkUserInData, poolNotesFromData, (req, res) => {
   res.status(200).json(req.notes)
 });
 

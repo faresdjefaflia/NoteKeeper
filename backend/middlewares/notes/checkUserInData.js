@@ -13,10 +13,10 @@ const pool = require('../../db');
  */
 
 module.exports = async (req, res, next) => {
-  const { user_id } = req.body;
+  const user_id  = req.user.user;
   try {
-    const poolUser = await pool.query('SELECT * FROM users WHERE id = ?', [user_id]);
-    if (poolUser.length === 0) {
+    const poolUser = await pool.query('SELECT id FROM users WHERE id = ?', [user_id]);
+    if (!poolUser.length) {
       return res.status(400).send('User not found');
     };
     req.poolUser = poolUser;
@@ -24,6 +24,5 @@ module.exports = async (req, res, next) => {
   catch (err) {
     res.status(400).send('error');
   }
-  
   next();
 };
