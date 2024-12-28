@@ -71,7 +71,7 @@ router.post('/', validateJWT, validateJoiForAdd, checkUserInData, addNoteToData,
   @etape06 Handles any errors in the middleware with appropriate error messages.
  */
 
-router.put('/', validateJWT, validateJoiForUpdate, checkUserInData, updateNoteInData, (req, res) => {
+router.put('/:id', validateJWT, validateJoiForUpdate, checkUserInData, updateNoteInData, (req, res) => {
   res.status(200).send(req.poolNotes)
 });
 

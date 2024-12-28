@@ -2,7 +2,7 @@ const pool = require('../../../db');
 const data = require('../../../db');
 
 module.exports = async (req, res, next) => {
-  const idNote = req.body.id;
+  const idNote = req.params.id;
   const idUser = req.user.user;
   const contentNote = req.body.content;
   console.log(idNote + idUser + contentNote)
