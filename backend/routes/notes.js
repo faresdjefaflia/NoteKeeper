@@ -19,6 +19,9 @@ const validateJoiForUpdate = require('../middlewares/notes/put/validateJoiForUpd
 const updateNoteInData = require('../middlewares/notes/put/updateNoteInData');
 /*********/
 
+// delete notes DELETE
+const deleteNoteFromData = require('../middlewares/notes/delete/deleteNoteFromData');
+
 
 /**
   @desc Retrieve user notes from the database
@@ -71,5 +74,22 @@ router.post('/', validateJWT, validateJoiForAdd, checkUserInData, addNoteToData,
 router.put('/', validateJWT, validateJoiForUpdate, checkUserInData, updateNoteInData, (req, res) => {
   res.status(200).send(req.poolNotes)
 });
+
+
+/**
+  @desc Delete a user note from the database
+  @route /notes/:id
+  @method DELETE
+  @access private
+  @etape01 Validates the JWT token to ensure user authentication.
+  @etape02 Confirms the existence of the user in the database.
+  @etape03 Deletes the note with the specified ID from the database.
+  @etape04 Returns a success message upon successful deletion.
+  @etape05 Handles any errors in the middleware with appropriate error messages.
+ */
+
+router.delete('/:id', validateJWT, checkUserInData, deleteNoteFromData, (req, res) => {
+  res.status(200).send('note is delete')
+})
 
 module.exports = router;
