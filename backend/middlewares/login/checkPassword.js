@@ -20,10 +20,10 @@ module.exports = async (req, res, next) => {
     if (checkPassword) {
       next();
     } else {
-      return res.status(400).json({ message: 'sorry you cant loin now' });
+      return res.status(400).json({ message: 'sorry you cant login now' });
     }
   }
   catch (err) {
-    return res.status(500).send('error')
+    return res.status(500).json({message: 'problem server'})
   }
 };

@@ -19,7 +19,7 @@ const hashPassword = async (req, res, next) => {
     req.body.password = hash;
     next();
   } catch (err) {
-    res.status(500).send('Error hashing password');
+    res.status(500).json({message: 'problem server'});
   }
 };
 

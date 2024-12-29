@@ -8,6 +8,6 @@ module.exports = async (req, res, next) => {
     next()
   }
   catch (err) {
-    res.status(500).send('server problem');
+    res.status(500).json({message: 'server problem'});
   };
 };

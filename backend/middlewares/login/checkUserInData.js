@@ -17,12 +17,12 @@ module.exports = async (req, res, next) => {
   try {
     const poolUser = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
     if (poolUser.length === 0) {
-      return res.status(400).send('User not found');
+      return res.status(400).json({ message: 'User not found' });
     };
     req.poolUser = poolUser;
   }
   catch (err) {
-    res.status(400).send('error');
+    res.status(400).json({message: 'problem server'});
   }
   
   next();

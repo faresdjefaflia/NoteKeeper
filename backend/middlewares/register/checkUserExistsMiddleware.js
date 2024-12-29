@@ -17,11 +17,11 @@ const checkUserExists = async (req, res, next) => {
   try {
     const verifUser = await pool.query('SELECT email FROM users WHERE email = ?', [email]);
     if (verifUser.length > 0) {
-      return res.status(400).send('User already exists');
+      return res.status(400).json({message: 'User already exists'});
     }
     next(); 
   } catch (err) {
-    res.status(500).send('Error checking user existence');
+    res.status(500).json({message: 'problem server'});
   }
 };
 

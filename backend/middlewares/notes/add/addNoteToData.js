@@ -16,9 +16,11 @@ module.exports = async (req, res, next) => {
   const user_id = req.user.user;
   try {
     const addNoteToData = await pool.query('INSERT INTO notes (user_id, content) VALUES (?, ?)', [user_id, content]);
+    const poolNotes = await pool.query('SELECT * FROM notes WHERE user_id = ?', [user_id]);
+    req.notes = poolNotes;
     next();
   }
   catch (err) {
-    res.status(500).send('sorry problem server')
+    res.status(500).json({message: 'sorry problem server'})
   };
 };

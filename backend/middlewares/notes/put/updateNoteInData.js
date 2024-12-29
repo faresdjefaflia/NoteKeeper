@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
   try {
     const update = await data.query('UPDATE notes SET content= ? WHERE id = ? AND user_id = ?', [contentNote, idNote, idUser]);
     const poolNote = await data.query('SELECT * FROM notes WHERE user_id = ?', [idUser]);
-    req.poolNotes = poolNote;
+    req.notes = poolNote;
     next();
   }
   catch (err) {

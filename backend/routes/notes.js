@@ -55,12 +55,12 @@ router.get('/', validateJWT, checkUserInData, poolNotesFromData, (req, res) => {
  */
 
 router.post('/', validateJWT, validateJoiForAdd, checkUserInData, addNoteToData, (req, res) => {
-  res.status(200).send('thanks, the note is save');
+  res.status(200).json(req.notes);
 });
 
 /**
   @desc Update an existing user note in the database
-  @route /notes
+  @route /notes:id
   @method PUT
   @access private
   @etape01 Validates the JWT token to ensure user authentication.
@@ -72,7 +72,7 @@ router.post('/', validateJWT, validateJoiForAdd, checkUserInData, addNoteToData,
  */
 
 router.put('/:id', validateJWT, validateJoiForUpdate, checkUserInData, updateNoteInData, (req, res) => {
-  res.status(200).send(req.poolNotes)
+  res.status(200).send(req.notes);
 });
 
 
@@ -89,7 +89,7 @@ router.put('/:id', validateJWT, validateJoiForUpdate, checkUserInData, updateNot
  */
 
 router.delete('/:id', validateJWT, checkUserInData, deleteNoteFromData, (req, res) => {
-  res.status(200).send('note is delete')
+  res.status(200).json(req.notes)
 })
 
 module.exports = router;
