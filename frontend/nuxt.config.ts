@@ -22,5 +22,8 @@ export default defineNuxtConfig({
       },
       display: 'swap', // تسريع عرض النصوص
     }]
-  ]
+  ],
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
 })
