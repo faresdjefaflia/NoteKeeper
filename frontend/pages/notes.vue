@@ -1,11 +1,10 @@
 <template>
   <section class="flex justify-center items-center py-7">
     <div class="w-4/5 grid grid-cols-4 gap-4">
-      <Notes v-if="login === true" />
-      <p v-else>you need to login</p>
+      <Notes />
     </div>
   </section>
-  <AddNote v-if="boxDisplay === true" />
+  <AddNote v-if="boxDisplay" />
 </template>
 
 <script setup>

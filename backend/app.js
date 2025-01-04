@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const cors = require('cors');
+
 var notesRouter = require('./routes/notes');
 var usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
@@ -11,6 +13,9 @@ const registerRouter = require('./routes/register');
 const homeRouter = require('./routes/index');
 
 var app = express();
+
+app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

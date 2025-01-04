@@ -20,10 +20,9 @@ module.exports = async (req, res, next) => {
       return res.status(400).json({ message: 'User not found' });
     };
     req.poolUser = poolUser;
+    next();
   }
   catch (err) {
-    res.status(400).json({message: 'problem server'});
+    return res.status(500).json({message: 'problem server'});
   }
-  
-  next();
 };
