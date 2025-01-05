@@ -5,7 +5,7 @@
       <h1 class="mt-3">{{ resData.message }} </h1>
       <input v-model="dataLogin.email" class="border border-01 rounded-md px-2 py-2 block mt-4" placeholder="Email"
         type="email">
-      <input v-model="dataLogin.password" class="border border-01 rounded-md px-2 py-2 block mt-4" placeholder="d"
+      <input v-model="dataLogin.password" class="border border-01 rounded-md px-2 py-2 block mt-4" placeholder="password"
         type="password">
       <button class="bg-01 text-02 w-[266px] rounded-md px-2 py-2 block mt-4" type="submit">Log in</button>
     </form>
