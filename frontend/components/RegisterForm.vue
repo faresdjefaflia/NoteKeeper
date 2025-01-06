@@ -1,8 +1,8 @@
 <template>
   <div class="flex justify-center items-center py-32">
-    <form @submit.prevent="sendData">
+    <form class="max-w-[266px]" @submit.prevent="sendData">
       <h1 class="text-01 font-medium text-3xl">Register</h1>
-      <h1 class="mt-3">{{ dataRes.message }} </h1>
+      <AlertError>{{ dataRes.message }}</AlertError>
       <input v-model="dataRegister.name" class="border border-01 rounded-md px-2 py-2 block mt-4" placeholder="Name"
         type="text">
       <input v-model="dataRegister.email" class="border border-01 rounded-md px-2 py-2 block mt-4" placeholder="Email"
@@ -17,8 +17,8 @@
 <script setup>
 import { ref } from "vue";
   import axios from 'axios';
+import AlertError from "./AlertError.vue";
 ////////////////
-
 
   const dataRegister = ref(
     {
@@ -33,10 +33,9 @@ import { ref } from "vue";
     try {
       const response = await axios.post('http://localhost:5000/register', dataRegister.value);
       dataRes.value = response.data;
-      console.log(response.data)
+      navigateTo('/login')
     } catch (error) {
       dataRes.value = error.response.data
-      console.log(error.response)
     }
   }
 </script>

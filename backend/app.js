@@ -10,6 +10,7 @@ var notesRouter = require('./routes/notes');
 var usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+const authRouter = require('./routes/auth.js');
 const homeRouter = require('./routes/index');
 
 var app = express();
@@ -31,6 +32,7 @@ app.use('/notes', notesRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/auth', authRouter);
 app.use('/' , homeRouter);
 
 // catch 404 and forward to error handler

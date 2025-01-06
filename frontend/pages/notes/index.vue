@@ -1,8 +1,6 @@
 <template>
   <section class="flex justify-center items-center py-7">
-    <div class="w-4/5 grid grid-cols-4 gap-4">
-      <Notes />
-    </div>
+    <Notes />
     <AddNote v-if="boxDisplay" />
   </section>
 </template>

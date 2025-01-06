@@ -1,11 +1,15 @@
 <template>
   <section>
-    <Welcome />
+    <ToNotes v-if="login" />
+    <Welcome v-else />
+    <h1>{{ login }}</h1>
   </section>
 </template>
 
 <script setup>
-// definePageMeta({
-//   middleware: ["auth"]
-// })
+import { computed } from 'vue';
+  definePageMeta({
+    middleware: ["auth"]
+  })
+const login = computed(() => useAuthStore().login)
 </script>
