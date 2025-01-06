@@ -2,7 +2,9 @@ import { defineStore } from 'pinia';
 
 export const useAddNotesStore = defineStore('addNotes', {
   state: () => {
-    boxInputNewNotes: false;
+    return {
+    boxInputNewNotes: false
+    }
   },
   actions: {
     showBox() {

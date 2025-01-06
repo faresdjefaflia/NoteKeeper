@@ -14,8 +14,6 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
-
-
 const notes = ref(
     [
       // { id: 1, content: 'Meeting at 10 AM tomorrow for project discussion.' },

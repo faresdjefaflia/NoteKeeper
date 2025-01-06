@@ -3,16 +3,17 @@
     <div class="w-4/5 grid grid-cols-4 gap-4">
       <Notes />
     </div>
+    <AddNote v-if="boxDisplay" />
   </section>
-  <AddNote v-if="boxDisplay" />
 </template>
 
 <script setup>
 import { computed } from "vue";
+
 definePageMeta({
-  layout: 'notes'
+  middleware: ["auth"]
 })
-const login = false;
+
 
 const useAddNotes = useAddNotesStore()
 const boxDisplay = computed(() => useAddNotes.boxInputNewNotes)
