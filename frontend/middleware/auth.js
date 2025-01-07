@@ -1,15 +1,13 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async(to, from) => {
   const auth = useAuthStore();
-  auth.checkToken();
+  await auth.checkToken();
+
   const token = auth.login;
-  if (!token) {
-    if (to.path == '/notes') {
-      return navigateTo('/login');
-    }
+  console.log(token)
+  if (!token && to.path == '/notes') {
+    return navigateTo('/login');
   }
-  else {
-    if (to.path !== '/notes') {
-      return navigateTo('/notes');
-    }
+  else if(token && to.path !== '/notes') {
+    return navigateTo('/notes');
   }
 });

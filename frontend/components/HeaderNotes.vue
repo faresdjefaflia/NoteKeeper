@@ -16,6 +16,6 @@ const showBox = useAddNotes.showBox;
 async function logout() {
   sessionStorage.clear()
   useAuth.login = false
-  navigateTo('/login')
+  await navigateTo('/login')
 }
 </script>
