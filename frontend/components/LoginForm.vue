@@ -31,6 +31,8 @@ async function sendData() {
   try {
     const response = await axios.post('http://localhost:5000/login', dataLogin.value);
     sessionStorage.setItem('token', response.data.token);
+    const cookie = useCookie('token')
+    cookie.value = response.data.token
     navigateTo('/notes')
   }
   catch (error) {

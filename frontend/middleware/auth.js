@@ -1,13 +1,17 @@
 export default defineNuxtRouteMiddleware(async(to, from) => {
-  const auth = useAuthStore();
-  await auth.checkToken();
-
-  const token = auth.login;
-  console.log(token)
-  if (!token && to.path == '/notes') {
-    return navigateTo('/login');
-  }
-  else if(token && to.path !== '/notes') {
-    return navigateTo('/notes');
-  }
+    const auth = useAuthStore();
+    const token = useCookie('token');
+    
+    if (token.value) {
+      auth.login = true
+      if (to.path !== '/notes') {
+        return navigateTo('/notes');
+      }
+    }
+    else {
+      auth.login = false;
+      if (to.path == '/notes') {
+        return navigateTo('/login')
+      }
+    }
 });

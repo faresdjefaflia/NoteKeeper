@@ -6,12 +6,4 @@ export const useAuthStore = defineStore('useAuth', {
       login: null,
     }
   },
-  actions: {
-    checkToken() {
-      if (process.client) {
-        const token = sessionStorage.getItem('token');
-        this.login = !!token
-      }
-    },
-  }
 })

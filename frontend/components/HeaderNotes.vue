@@ -13,9 +13,10 @@ const useAddNotes = useAddNotesStore()
 const useAuth = useAuthStore();
 const showBox = useAddNotes.showBox;
 
-async function logout() {
-  sessionStorage.clear()
+function logout() {
+  const removeCookie = useCookie('token');
+  removeCookie.value = undefined
   useAuth.login = false
-  await navigateTo('/login')
+  navigateTo('/login')
 }
 </script>
