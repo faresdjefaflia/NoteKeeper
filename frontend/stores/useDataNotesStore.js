@@ -12,6 +12,7 @@ export const useDataNotesStore = defineStore('useDataNotes', {
     }
   },
   actions: {
+    //GET ALL NOTES
     async getNotes() {
       const token = useCookie('token');
       try {
@@ -25,6 +26,22 @@ export const useDataNotesStore = defineStore('useDataNotes', {
       catch (error) {
         console.log(error.response.data)
       }
-    }
-  }
+    },
+
+    // DELETE NOTE
+    async deleteNote(id) {
+    const token = useCookie('token');
+      try {
+        const response = await axios.delete(`http://localhost:5000/notes/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token.value}`
+          }
+        })
+        this.notes = response.data;
+      }
+      catch (error) {
+        console.log(error)
+      }
+    },
+  },
 })

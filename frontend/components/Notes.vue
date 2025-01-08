@@ -22,30 +22,18 @@ import axios from "axios";
 
 
 const useDataNotes = useDataNotesStore();
-// GET ALL NOTES FROM DATA BASE
+// GET ALL NOTES FROM DATABASE
 const getNotes = useDataNotes.getNotes;
-await getNotes();
-const notes = computed(() => useDataNotes.notes) ;
+getNotes();
+const notes = computed(() => useDataNotes.notes);
 
-// DELETE NOTE FROM DATA BASE
-async function deleteNote(id) {
-  const token = useCookie('token');
-  try {
-    const response = await axios.delete(`http://localhost:5000/notes/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token.value}`
-      }
-    })
-    useDataNotes.notes = response.data;
-  }
-  catch (error) {
-    console.log(error)
-  }
-}
+// DELETE NOTE FROM DATABASE
+const deleteNote = useDataNotes.deleteNote;
 
-// EDIT AND SAVE NOTE TO DATA BASE
+// EDIT AND SAVE NOTE TO DATABASE
 function editNote(id, content) {
   console.log(id)
   console.log(content)
-}
+};
+// await work()
 </script>
