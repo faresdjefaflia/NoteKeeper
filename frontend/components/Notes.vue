@@ -17,36 +17,35 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed } from "vue";
 import axios from "axios";
 
-const notes = ref([]);
-const token = useCookie('token');
+
+const useDataNotes = useDataNotesStore();
+// GET ALL NOTES FROM DATA BASE
+const getNotes = useDataNotes.getNotes;
+await getNotes();
+const notes = computed(() => useDataNotes.notes) ;
 
 // DELETE NOTE FROM DATA BASE
-function deleteNote(id) {
-  console.log(id)
+async function deleteNote(id) {
+  const token = useCookie('token');
+  try {
+    const response = await axios.delete(`http://localhost:5000/notes/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`
+      }
+    })
+    useDataNotes.notes = response.data;
+  }
+  catch (error) {
+    console.log(error)
+  }
 }
+
 // EDIT AND SAVE NOTE TO DATA BASE
-const textEdit = ''
 function editNote(id, content) {
   console.log(id)
   console.log(content)
 }
-// GET ALL NOTES FROM DATA BASE
-async function getNotes() {
-  try {
-    const response = await axios.get('http://localhost:5000/notes/', {
-      headers: {
-        'Authorization': `Bearer ${token.value}`
-      }
-    });
-    notes.value = response.data
-    // console.log(response.data)
-  }
-  catch (error) {
-    console.log(error.response.data)
-  }
-}
-getNotes()
 </script>
