@@ -31,9 +31,6 @@ const notes = computed(() => useDataNotes.notes);
 const deleteNote = useDataNotes.deleteNote;
 
 // EDIT AND SAVE NOTE TO DATABASE
-function editNote(id, content) {
-  console.log(id)
-  console.log(content)
-};
-// await work()
+const editNote = useDataNotes.editNote;
+
 </script>

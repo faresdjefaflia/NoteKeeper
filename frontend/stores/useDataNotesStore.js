@@ -62,5 +62,23 @@ export const useDataNotesStore = defineStore('useDataNotes', {
     },
 
     // EDIT NOTE
+    async editNote(id, content) {
+      console.log(id)
+      const dataUpdate = { content: content }
+      console.log(dataUpdate)
+      
+      const token = useCookie('token');
+      try {
+        const response = await axios.put(`http://localhost:5000/notes/${id}`, dataUpdate, {
+          headers: {
+            'Authorization': `Bearer ${token.value}`
+          }
+        })
+        this.notes = response.data;
+      }
+      catch (error) {
+        console.log(error.response.data)
+      }
+    }
   },
 })
