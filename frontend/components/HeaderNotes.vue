@@ -9,6 +9,10 @@
 </template>
 
 <script setup>
+// This code handles the logout process: it clears the token, 
+// sets login state to false, and redirects the user to the login page.
+// Technologies used: Vue 3, Pinia
+
 const useAddNotes = useAddNotesStore()
 const useAuth = useAuthStore();
 const showBox = useAddNotes.showBox;

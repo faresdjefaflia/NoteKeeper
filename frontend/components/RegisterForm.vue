@@ -15,10 +15,13 @@
 </template>
 
 <script setup>
+// This code manages user registration by sending a POST request to the server and handling success or error responses.
+// It uses Vue's reactive `ref` for data binding and Axios for making HTTP requests.
+// Technologies used: Vue 3, Axios, Vue 3 Composition API
+
 import { ref } from "vue";
-  import axios from 'axios';
+import axios from 'axios';
 import AlertError from "./AlertError.vue";
-////////////////
 
   const dataRegister = ref(
     {

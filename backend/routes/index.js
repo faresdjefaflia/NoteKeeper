@@ -11,9 +11,14 @@ const jwt = require('../middlewares/validateJWT');
   @etape03 Returns the processed data in the response. @returnData
  */
 
-// router.get('/', jwt, (req, res) => {
-//   const userId = req.user.user;
-//   res.json(userId);
-// });
+router.get('/', (req, res) => {
+  res.status(200).json(
+    {
+      author: 'Fares Djefaflia',
+      year: '2024',
+      url: 'https://github.com/faresdjefaflia/NoteKeeper'
+    }
+  )
+});
 
 module.exports = router;

@@ -13,6 +13,12 @@
 </template>
 
 <script setup>
+// This code handles user login by sending credentials to the server using Axios.
+// On success, it stores the received token in cookie, 
+// then redirects to the notes page using Nuxt's navigateTo. On error, it stores the error message.
+// Technologies used: Vue 3, Axios, Nuxt.js, Cookies
+
+
 import { ref,  } from "vue";
 import  axios  from "axios";
 
@@ -30,7 +36,6 @@ const resData = ref('')
 async function sendData() {
   try {
     const response = await axios.post('http://localhost:5000/login', dataLogin.value);
-    sessionStorage.setItem('token', response.data.token);
     const cookie = useCookie('token')
     cookie.value = response.data.token
     navigateTo('/notes')

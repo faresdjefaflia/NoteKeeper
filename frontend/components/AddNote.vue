@@ -13,6 +13,11 @@
 </template>
 
 <script setup>
+// This code handles adding a new note: it triggers the addNote action to save the note 
+// and then closes the input box.
+// Technologies used: Vue 3, Pinia
+
+
 // CLICK FOR CLOSE BOX
 const useAddNotes = useAddNotesStore()
 const showBox = useAddNotes.showBox

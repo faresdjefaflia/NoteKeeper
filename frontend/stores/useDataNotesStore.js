@@ -1,3 +1,8 @@
+// This store manages the notes data (fetching, adding, editing, and deleting) from the database.
+// It interacts with the backend via axios requests and updates the state accordingly.
+// Technologies used: Pinia, Vue 3, Axios
+
+
 import { defineStore } from 'pinia';
 import axios from "axios";
 

@@ -1,7 +1,7 @@
 ### Project Name: **NoteKeeper**
 
 **Brief Description**:  
-A web application for managing notes, allowing users to add, edit, and delete their notes with secure access using JWT and data validation via Joi. Built with Express.js as the server and MariaDB as the database.
+A web application for managing notes, allowing users to add, edit, and delete their notes with secure access using JWT and data validation via Joi. Built with Express.js as the server and MariaDB as the database. This is an educational project to test and showcase skills.
 
 ---
 
@@ -10,11 +10,18 @@ A web application for managing notes, allowing users to add, edit, and delete th
 #### **Frontend**:  
 1. **Nuxt.js**: Framework for building advanced Vue.js applications.  
 2. **Tailwind CSS**: Framework for flexible and easy-to-design user interfaces.
+3. **Axios**: An HTTP library for making server requests and handling data efficiently.
+4. **Pinia**: A state management library for Vue with a simple and modern structure.
+5. **Vue.js**: A JavaScript framework for building interactive and customizable user interfaces.
+
+#### **Database**:
+1.**MariaDB**: A relational database management system used to store and manage structured data.
+2.**DBeaver**: A universal database management tool that supports MariaDB (and other databases) for querying, managing, and visualizing data.
 
 #### **Backend**:  
 1. **Express.js**: Web application framework.  
 2. **MariaDB**: Database for storing user and note data.  
-3. **JWT**: For user authentication and secure access.  
+3. **JWT jsonwebtoken**: For user authentication and secure access.  
 4. **bcrypt**: For password encryption.  
 5. **Joi**: For validating user input.
 
@@ -80,6 +87,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 #### **2. User Login**:  
 **Endpoint**: `POST /login`  
 - **Input**:  
+  - `name`
   - `email`  
   - `password`  
 - **Process**:  
@@ -136,7 +144,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 
 | **Method** | **Endpoint**    | **Input**               | **Output**            |
 |------------|-----------------|-------------------------|-----------------------|
-| POST       | `/register`     | `email`, `password`     | Success/Failure       |
+| POST       | `/register`     | `name`,`email`, `password`     | Success/Failure       |
 | POST       | `/login`        | `email`, `password`     | JWT Token             |
 | POST       | `/notes`        | `note_content`          | New Note              |
 | GET        | `/notes`        | None                    | List of Notes         |
@@ -220,17 +228,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 ---
 
 #### **Phase 5: Project Enhancement**  
-1. **Add Advanced Features:**  
-   - Implement search or categorization for notes. / تنفيذ ميزة البحث أو تصنيف الملاحظات.  
-   - Enhance the UI design with Tailwind CSS. / تحسين تصميم الواجهة باستخدام Tailwind CSS.  
 
-2. **Comprehensive Testing:**  
-   - Perform end-to-end testing of frontend and backend integration. / إجراء اختبارات شاملة لتكامل الواجهة الأمامية مع الخلفية.  
-   - Verify performance and resolve any remaining issues. / التحقق من الأداء وإصلاح المشكلات المتبقية.  
-
-3. **Final Deployment:**  
-   - Ensure readiness for production and deploy the application. / التأكد من الجاهزية للنشر وإطلاق التطبيق.
-   - 
 ### **Future Steps**  
 1. Add search and filter options for notes.  
 2. Implement note categorization (e.g., important, personal).  

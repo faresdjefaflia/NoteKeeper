@@ -2,7 +2,6 @@
   <section>
     <ToNotes v-if="login" />
     <Welcome v-else />
-    <h1>{{ login }}</h1>
   </section>
 </template>
 

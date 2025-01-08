@@ -15,5 +15,4 @@ definePageMeta({
 
 const useAddNotes = useAddNotesStore()
 const boxDisplay = computed(() => useAddNotes.boxInputNewNotes)
-const showBox = useAddNotes.showBox
 </script>

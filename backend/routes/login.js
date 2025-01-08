@@ -25,7 +25,6 @@ const createSession = require('../middlewares/login/createSession');
 
 router.post('/',validateReq, checkUserInData, checkPassword, createSession, (req, res) => {
   res.json({
-    dataUser: req.poolUser,
     token: req.token
   });
 });

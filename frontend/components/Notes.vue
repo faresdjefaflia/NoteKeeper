@@ -17,8 +17,11 @@
 </template>
 
 <script setup>
+// This code interacts with the state management store to retrieve, delete, and edit notes in the database.
+// It uses computed properties to fetch the notes and functions for handling note deletion and editing.
+// Technologies used: Vue 3, pinia (store management), Computed Properties
+
 import { computed } from "vue";
-import axios from "axios";
 
 
 const useDataNotes = useDataNotesStore();
