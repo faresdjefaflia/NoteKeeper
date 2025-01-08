@@ -28,6 +28,23 @@ export const useDataNotesStore = defineStore('useDataNotes', {
       }
     },
 
+    // ADD NOTE
+    async addNote(content) {
+      const token = useCookie('token');
+      try {
+        const response = await axios.post(`http://localhost:5000/notes`, content ,
+        {
+          headers: {
+            'Authorization': `Bearer ${token.value}`
+          }
+        })
+        this.notes = response.data;
+      }
+      catch (error) {
+        console.log(error.response.data)
+      }
+    },
+
     // DELETE NOTE
     async deleteNote(id) {
     const token = useCookie('token');
@@ -43,5 +60,7 @@ export const useDataNotesStore = defineStore('useDataNotes', {
         console.log(error)
       }
     },
+
+    // EDIT NOTE
   },
 })
