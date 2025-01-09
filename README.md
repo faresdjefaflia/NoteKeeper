@@ -3,6 +3,9 @@
 **Brief Description**:  
 A web application for managing notes, allowing users to add, edit, and delete their notes with secure access using JWT and data validation via Joi. Built with Express.js as the server and MariaDB as the database. This is an educational project to test and showcase skills.
 
+- To view the project as a video, you can visit: **https://youtu.be/kQeq47EgirM**
+
+- In order to download the repository and preview it locally on your device you can follow these documents: **https://github.com/faresdjefaflia/NoteKeeper/blob/main/Setup_Guide.md**
 ---
 
 ### **Technologies Used**  
@@ -16,6 +19,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 
 #### **Database**:
 1.**MariaDB**: A relational database management system used to store and manage structured data.
+
 2.**DBeaver**: A universal database management tool that supports MariaDB (and other databases) for querying, managing, and visualizing data.
 
 #### **Backend**:  
@@ -48,7 +52,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
    - Use JWT for all protected endpoints.
 
 4. **Data Validation**:
-   - Validate inputs (email, password, content) using Joi.
+   - Validate inputs (name, email, password, content) using Joi.
 
 ---
 
@@ -58,16 +62,14 @@ A web application for managing notes, allowing users to add, edit, and delete th
 
 1. **Users Table**:  
    - `id` (INT, PRIMARY KEY)  
+   - `name` (TEXT)  
    - `email` (VARCHAR, UNIQUE)  
    - `password` (VARCHAR)  
-   - `created_at` (TIMESTAMP)  
 
 2. **Notes Table**:  
    - `id` (INT, PRIMARY KEY)  
    - `user_id` (INT, FOREIGN KEY -> users.id)  
-   - `note_content` (TEXT)  
-   - `created_at` (TIMESTAMP)  
-   - `updated_at` (TIMESTAMP)  
+   - `content` (TEXT)  
 
 ---
 
@@ -76,6 +78,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 #### **1. User Registration**:  
 **Endpoint**: `POST /register`  
 - **Input**:  
+  - `name`
   - `email`  
   - `password`  
 - **Process**:  
@@ -87,7 +90,6 @@ A web application for managing notes, allowing users to add, edit, and delete th
 #### **2. User Login**:  
 **Endpoint**: `POST /login`  
 - **Input**:  
-  - `name`
   - `email`  
   - `password`  
 - **Process**:  
@@ -114,7 +116,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 
 - **Update Note**:  
   **Endpoint**: `PUT /notes/:id`  
-  - **Input**: `note_content`  
+  - **Input**: `content`  
   - **Process**:  
     - Verify JWT.  
     - Update note.  
@@ -146,7 +148,7 @@ A web application for managing notes, allowing users to add, edit, and delete th
 |------------|-----------------|-------------------------|-----------------------|
 | POST       | `/register`     | `name`,`email`, `password`     | Success/Failure       |
 | POST       | `/login`        | `email`, `password`     | JWT Token             |
-| POST       | `/notes`        | `note_content`          | New Note              |
+| POST       | `/notes`        | `content`          | New Note              |
 | GET        | `/notes`        | None                    | List of Notes         |
 | PUT        | `/notes/:id`    | `note_content`          | Updated Note          |
 | DELETE     | `/notes/:id`    | None                    | Success/Failure       |

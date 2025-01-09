@@ -69,6 +69,18 @@ The backend will be available at:
 2. Set up the database and tables as per the schema provided in the project.
 3. Use **DBeaver** or a similar tool to connect to the MariaDB server and manage the database.
 
+#### **NoteKeeper Project Files**
+
+open: **/api-docs-and-dump**
+
+##### **1. dump-NoteKeeper-202501081959**
+- **Description**: A database dump containing the `users` and `notes` tables with their data.
+- **Usage**: Restore this dump to set up the NoteKeeper database.
+
+##### **2. NoteKeeper.postman_collection**
+- **Description**: A Postman collection for testing the NoteKeeper API endpoints.
+- **Usage**: Import the file into Postman to test the API.
+
 ---
 
 ### **5. Testing API Endpoints with Postman**
